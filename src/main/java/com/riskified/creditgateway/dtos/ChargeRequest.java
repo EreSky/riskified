@@ -1,6 +1,6 @@
 package com.riskified.creditgateway.dtos;
 
-import com.riskified.creditgateway.CreditCompanyType;
+import com.riskified.creditgateway.enums.CreditCompanyType;
 import lombok.Data;
 
 import java.math.BigDecimal;
