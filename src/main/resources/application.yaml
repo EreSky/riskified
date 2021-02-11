@@ -1,0 +1,10 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /api
+
+application:
+  visa:
+    base-url: https://interview.riskxint.com/visa/api
+  mastercard:
+    base-url: https://interview.riskxint.com/mastercard
