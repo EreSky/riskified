@@ -1,16 +1,15 @@
 package com.riskified.creditgateway.interfaces;
 
 import com.riskified.creditgateway.enums.CreditCompanyType;
-import com.riskified.creditgateway.interfaces.CreditCompanyProxy;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.client.RestTemplate;
 
 @Component
 public abstract class BaseCreditCompany implements CreditCompanyProxy {
-    protected WebClient webClient;
+    protected RestTemplate restTemplate;
 
-    public BaseCreditCompany(WebClient webClient) {
-        this.webClient = webClient;
+    public BaseCreditCompany(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
     }
 
     public abstract CreditCompanyType getCompany();
