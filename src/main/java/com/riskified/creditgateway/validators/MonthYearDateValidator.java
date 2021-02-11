@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class MonthYearDateValidator implements ConstraintValidator<MonthYear, String> {
+
     private final static String dateFormat = "MM/YY";
 
     @Override

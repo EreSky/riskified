@@ -7,6 +7,7 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public abstract class BaseCreditCompany implements CreditCompanyProxy {
     protected RestTemplate restTemplate;
+    protected String baseUrl;
 
     public BaseCreditCompany(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
