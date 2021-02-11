@@ -4,7 +4,6 @@ import com.riskified.creditgateway.dtos.ChargeRequest;
 import com.riskified.creditgateway.dtos.ChargeResponse;
 import com.riskified.creditgateway.services.ChargeService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,7 +23,7 @@ public class ChargeController {
     }
 
     @PostMapping
-    public ResponseEntity<ChargeResponse> charge(@RequestBody @Valid ChargeRequest body,
+    public ChargeResponse charge(@RequestBody @Valid ChargeRequest body,
                                                  @RequestHeader(value = "merchant-identifier") String merchantId) {
         log.info("new charge request: {} for merchant: {}", body, merchantId);
 
