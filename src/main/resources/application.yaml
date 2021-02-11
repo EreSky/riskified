@@ -6,5 +6,7 @@ server:
 application:
   visa:
     base-url: https://interview.riskxint.com/visa/api
+    retry-count: 3
   mastercard:
     base-url: https://interview.riskxint.com/mastercard
+    retry-count: 3
