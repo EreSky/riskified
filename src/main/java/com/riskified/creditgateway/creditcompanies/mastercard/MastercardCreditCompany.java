@@ -24,10 +24,14 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class MastercardCreditCompany extends BaseCreditCompany {
 
+    private final ObjectMapper objectMapper;
+
     public MastercardCreditCompany(RestTemplate restTemplate,
-                                   @Value("${application.mastercard.base-url}") String baseUrl) {
+                                   @Value("${application.mastercard.base-url}") String baseUrl,
+                                   ObjectMapper objectMapper) {
         super(restTemplate);
         this.baseUrl = baseUrl;
+        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -46,12 +50,12 @@ public class MastercardCreditCompany extends BaseCreditCompany {
 
         HttpEntity<MastercardChargeRequest> request =
                 new HttpEntity<>(MastercardChargeRequest.builder()
-                        .first_name(name[0])
-                        .last_name(name[1])
-                        .card_number(chargeRequest.getCreditCardNumber())
+                        .firstName(name[0])
+                        .lastName(name[1])
+                        .cardNumber(chargeRequest.getCreditCardNumber())
                         .expiration(formattedExpirationDate)
                         .cvv(chargeRequest.getCvv())
-                        .charge_amount(chargeRequest.getAmount())
+                        .chargeAmount(chargeRequest.getAmount())
                         .build(), headers);
         try {
             var response = restTemplate.exchange(baseUrl + "/capture_card",
@@ -61,12 +65,11 @@ public class MastercardCreditCompany extends BaseCreditCompany {
         } catch (HttpStatusCodeException e) {
             if (e.getStatusCode() == HttpStatus.BAD_REQUEST) {
                 String responseString = e.getResponseBodyAsString();
-                ObjectMapper mapper = new ObjectMapper();
                 try {
-                    MastercardChargeResult result = mapper.readValue(responseString,
+                    MastercardChargeResult result = objectMapper.readValue(responseString,
                             MastercardChargeResult.class);
 
-                    throw new BusinessException(result.getDecline_reason());
+                    throw new BusinessException(result.getDeclineReason());
                 } catch (JsonProcessingException parseException) {
                     log.error("failed to post charge request: {}, time: {}", e.getMessage(), System.currentTimeMillis());
                     throw new RetryException(e.getMessage(), e);
