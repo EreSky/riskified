@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DeclinedChargesRepositoryTest {
 
-    private InMemoryDeclinedChargesRepository declinedChargesRepository = new InMemoryDeclinedChargesRepository();
+    private final InMemoryDeclinedChargesRepository declinedChargesRepository = new InMemoryDeclinedChargesRepository();
 
     @Test
-    public void Check_add_declined_reason() throws InterruptedException {
+    public void WHEN_ADD_TO_CACHE_IN_MULTITHREADED_ENV_WORKS() throws InterruptedException {
         var t1 = new Thread(() -> {
             for (int i = 0; i < 10000; i++) {
                 declinedChargesRepository.addDeclinedReason("fox", "too poor");

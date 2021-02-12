@@ -17,7 +17,7 @@ class CreditCompanyFactoryTest {
     private CreditCompanyFactory factory;
 
     @Test
-    void verify_all_company_types_exist() {
+    void VERIFY_ALL_COMPANY_TYPES_EXIST() {
         Stream.of(CreditCompanyType.values())
                 .forEach(creditCompany -> {
                     var company = factory.getCreditCompany(creditCompany);
