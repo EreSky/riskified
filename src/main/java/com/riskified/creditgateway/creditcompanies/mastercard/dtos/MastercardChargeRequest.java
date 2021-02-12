@@ -1,5 +1,6 @@
 package com.riskified.creditgateway.creditcompanies.mastercard.dtos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Value;
 
@@ -8,10 +9,18 @@ import java.math.BigDecimal;
 @Value
 @Builder
 public class MastercardChargeRequest {
-    String first_name;
-    String last_name;
-    String card_number;
+    @JsonProperty("first_name")
+    String firstName;
+
+    @JsonProperty("last_name")
+    String lastName;
+
+    @JsonProperty("card_number")
+    String cardNumber;
+
     String expiration;
     String cvv;
-    BigDecimal charge_amount;
+
+    @JsonProperty("charge_amount")
+    BigDecimal chargeAmount;
 }
