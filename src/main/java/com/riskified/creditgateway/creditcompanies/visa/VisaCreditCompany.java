@@ -54,7 +54,7 @@ public class VisaCreditCompany extends BaseCreditCompany {
             if (response.getStatusCode().is2xxSuccessful()) {
                 var body = response.getBody();
                 if (body == null) {
-                    throw new BusinessException();
+                    throw new RetryException("empty body");
                 } else if (!VisaSuccessStatus.SUCCESS.equals(body.getChargeResult())) {
                     throw new BusinessException(body.getResultReason());
                 }
