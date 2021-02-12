@@ -12,17 +12,18 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 
 @Slf4j
-@RequestMapping("charges")
+@RequestMapping("/api")
 @RestController
 public class ChargeController {
     private final ChargeService chargeService;
 
-    // todo: /api didnt work
+    // personally i think the endpoint names are not very "Resty",
+    // I would leave the post as /api/charges and the get as /api/charges/status or something like that
     public ChargeController(ChargeService chargeService) {
         this.chargeService = chargeService;
     }
 
-    @PostMapping
+    @PostMapping("/charges")
     public ChargeResponse charge(@RequestBody @Valid ChargeRequest body,
                                                  @RequestHeader(value = "merchant-identifier") String merchantId) {
         log.info("new charge request: {} for merchant: {}", body, merchantId);
