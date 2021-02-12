@@ -20,12 +20,13 @@ public class WebConfig {
 
     @Bean
     public RetryTemplate retryTemplate(@Value("${application.retry.count:3}") Integer retryCount,
-                                       @Value("${application.retry.initial:1}") Integer initial) {
+                                       @Value("${application.retry.initial:1}") Integer initial,
+                                       @Value("${application.retry.factor:2}") Integer delayFactor) {
         SimpleRetryPolicy retryPolicy = new SimpleRetryPolicy(retryCount);
 
         ExponentialBackOffPolicy backOffPolicy = new ExponentialBackOffPolicy();
         backOffPolicy.setInitialInterval(initial);
-        backOffPolicy.setMultiplier(2);
+        backOffPolicy.setMultiplier(delayFactor);
 
         RetryTemplate retryTemplate = new RetryTemplate();
         retryTemplate.setRetryPolicy(retryPolicy);
